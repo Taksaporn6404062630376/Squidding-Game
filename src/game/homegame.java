@@ -8,7 +8,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.net.URL;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -36,9 +35,6 @@ public class homegame extends JPanel{
 	}
 	public void paintComponent(Graphics g){
             super.paintComponent(g);
-            g.drawImage(feild.getImage(),0,0,1000,800,this);
-//            g.setColor(Color.blue);
-//            g.setFont(new Font("2005_iannnnnTKO",Font.CENTER_BASELINE,150));		
-//            g.drawString("Exit",500,600);	
+            g.drawImage(feild.getImage(),0,0,1000,800,this);	
 	}
 }

@@ -38,7 +38,7 @@ public class Game extends JFrame implements ActionListener{
             state.scor=0;
             state.HP =3;
             state.times = 60;
-            state.startball=false;
+            state.squidrun=false;
             state.timestart=false;
 
         }else if(e.getSource() == state.BExithome){
@@ -57,8 +57,8 @@ public class Game extends JFrame implements ActionListener{
             state.t.suspend();
             state.time.suspend();
             state.actor.suspend();
-            state.tballs1.suspend();
-            state.tballs5.suspend();
+            state.tsq.suspend();
+            state.tbsq.suspend();
     
         }else if(e.getSource() == state.Bresum){
             this.setLocationRelativeTo(null);
@@ -68,8 +68,8 @@ public class Game extends JFrame implements ActionListener{
             state.t.resume();
             state.time.resume();
             state.actor.resume();
-            state.tballs1.resume();
-            state.tballs5.resume();
+            state.tsq.resume();
+            state.tbsq.resume();
 
         }
         else if(e.getSource() == state.Brestart){
@@ -82,7 +82,7 @@ public class Game extends JFrame implements ActionListener{
             state.scor=0;
             state.HP =3;
             state.times = 60;
-            state.startball=false;
+            state.squidrun=false;
             state.timestart=false;
 
         }

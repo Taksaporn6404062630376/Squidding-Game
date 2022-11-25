@@ -14,7 +14,11 @@ public class hook extends JPanel{
     public int y;
     public int x;
     public int count=0;
-    hook(int x,int y){
+
+    public hook() {
+    }
+    
+    public hook(int x,int y){
         imfire = new ImageIcon(this.getClass().getResource("image/hook.png"));
         this.x=x;
         this.y=y;

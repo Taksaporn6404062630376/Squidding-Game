@@ -42,13 +42,12 @@ public class playstate extends JPanel implements ActionListener{
     public JButton Bresum = new JButton(resum);
     public JButton Brestart = new JButton(restart);
     public ArrayList<hook> hook = new ArrayList<hook>();
-    public ArrayList<squid> ba1 = new ArrayList<squid>();
-    public ArrayList<badsquid> ba5 = new ArrayList<badsquid>();
+    public ArrayList<squid> sq = new ArrayList<squid>();
+    public ArrayList<badsquid> bsq = new ArrayList<badsquid>();
     public int times ;
     public int HP = 3;
-    public int rs1 = 1;
     boolean timestart = true;
-    boolean startball = false;
+    boolean squidrun = false;
     public int scor = 0;
     boolean paralyze1 = false;
     int time_paralyze=5;
@@ -80,11 +79,11 @@ public class playstate extends JPanel implements ActionListener{
             }
         }
     });
-    Thread tballs1 = new Thread(new Runnable(){
+    Thread tsq = new Thread(new Runnable(){
         public void run() {
             while(true){
                 try{
-                    if(startball == false){
+                    if(squidrun == false){
                         Thread.sleep((long)(Math.random()*10000)+2000);
 
                     }
@@ -93,20 +92,20 @@ public class playstate extends JPanel implements ActionListener{
                     e.printStackTrace();
 
                 }
-                if(startball == false){
-                    ba1.add(new squid());
+                if(squidrun == false){
+                    sq.add(new squid());
 
                 }
             }
         }
     });
 
-    Thread tballs5 = new Thread(new Runnable(){
+    Thread tbsq = new Thread(new Runnable(){
         public void run() {
             while(true){
                 try{
 
-                    if(startball==false){
+                    if(squidrun==false){
 
                         Thread.sleep((long)(Math.random()*10000)+2000);
                     }
@@ -115,8 +114,8 @@ public class playstate extends JPanel implements ActionListener{
                     e.printStackTrace();
 
                 }
-                if(startball == false){
-                    ba5.add(new badsquid());
+                if(squidrun == false){
+                    bsq.add(new badsquid());
 
                 }
             }
@@ -157,6 +156,7 @@ public class playstate extends JPanel implements ActionListener{
             }
         }
     });
+    
     public playstate(){
         this.setFocusable(true);
         this.setLayout(null);
@@ -209,8 +209,8 @@ public class playstate extends JPanel implements ActionListener{
         time.start();
         actor.start();
         t.start();
-        tballs1.start();
-        tballs5.start();
+        tsq.start();
+        tbsq.start();
         paralyze.start();
     }
     
@@ -272,14 +272,14 @@ public class playstate extends JPanel implements ActionListener{
                 }
             }
             //===============squid=============
-            for(int i=0 ; i<ba1.size();i++){
-                g.drawImage(ba1.get(i).getImage(),ba1.get(i).getX(), ba1.get(i).getY(),100,100,this);
+            for(int i=0 ; i<sq.size();i++){
+                g.drawImage(sq.get(i).getImage(),sq.get(i).getX(), sq.get(i).getY(),100,100,this);
             }
 
             for(int i=0 ; i<hook.size();i++){
-                for(int j=0 ; j<ba1.size();j++){
-                    if(Intersect(hook.get(i).getbound(),ba1.get(j).getbound())){
-                        ba1.remove(j);
+                for(int j=0 ; j<sq.size();j++){
+                    if(Intersect(hook.get(i).getbound(),sq.get(j).getbound())){
+                        sq.remove(j);
                         hook.remove(i);
                         scor += 20;
                     }
@@ -287,14 +287,14 @@ public class playstate extends JPanel implements ActionListener{
             }
 
             //============badsquid=============
-            for(int i=0 ; i<ba5.size();i++){
-                g.drawImage(ba5.get(i).getImage(), ba5.get(i).getX(), ba5.get(i).getY(),100,100,this);
+            for(int i=0 ; i<bsq.size();i++){
+                g.drawImage(bsq.get(i).getImage(), bsq.get(i).getX(), bsq.get(i).getY(),100,100,this);
 
             }
             for(int i=0 ; i<hook.size();i++){
-                for(int j=0 ; j<ba5.size();j++){
-                    if(Intersect(hook.get(i).getbound(), ba5.get(j).getbound())){
-                        ba5.remove(j);
+                for(int j=0 ; j<bsq.size();j++){
+                    if(Intersect(hook.get(i).getbound(), bsq.get(j).getbound())){
+                        bsq.remove(j);
                         hook.remove(i);
                         scor -=20;
                         HP=HP-1;
@@ -314,13 +314,14 @@ public class playstate extends JPanel implements ActionListener{
     public boolean Intersect(Rectangle2D a, Rectangle2D b){
         return (a.intersects(b));
     }
+    @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()== BStartover){
             this.setSize(1000,800);
             this.add(hg);
             this.setLocation(null);
             timestart = true;
-            startball = true;
+            squidrun = true;
 
         }else if(e.getSource() == BExitover){
             System.exit(0);

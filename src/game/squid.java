@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.geom.Rectangle2D;
 import java.net.URL;
 import javax.swing.ImageIcon;
+
 public class squid {
     Image img;
     public int x = 0;
